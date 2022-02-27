@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { create_observer } from '~/lib/observer';
 
-	const once = true;
+	let once = true;
 	const { observer, io } = create_observer({
 		rootMargin: `-49% 0px`
 	});
@@ -22,6 +22,7 @@
 <nav class="nav">
 	<div class="content">
 		<div data-test-id-container={currentId + 1}>{currentId + 1}</div>
+		<button data-test-id="btn-once" on:click={() => (once = false)}>Set once to false</button>
 	</div>
 </nav>
 <main class="container">

@@ -26,7 +26,6 @@ const scrollUpAndDown = async () => {
 
 test('observe', async ({ page }) => {
 	await page.goto('http://localhost:1234/test/basic');
-	await page.reload();
 
 	await page.evaluate(scrollUpAndDown);
 
@@ -36,19 +35,5 @@ test('observe', async ({ page }) => {
 	const currentSectionId = await sectionEls.first().textContent();
 	expect(+id).toBe(1);
 	expect(+currentSectionId).toBe(1);
-});
-
-test('observe once', async ({ page }) => {
-	await page.goto('http://localhost:1234/test/once');
 	await page.reload();
-
-	const sectionEls = page.locator('section.block');
-	const currentIdEl = page.locator('[data-test-id-container]');
-
-	await page.evaluate(scrollUpAndDown);
-
-	const id = await currentIdEl.textContent();
-	const currentSectionId = await sectionEls.first().textContent();
-	expect(+id).toBe(6);
-	expect(+currentSectionId).toBe(1);
 });
