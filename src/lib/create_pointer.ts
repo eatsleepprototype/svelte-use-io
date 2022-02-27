@@ -8,12 +8,18 @@ export const create_pointer = (entry: IntersectionObserverEntry) => {
 	if (!pointerEl) {
 		pointerEl = document.createElement('div');
 		pointerEl.dataset.useIoDev = 'true';
+		pointerEl.textContent = 'rootBound';
+		pointerEl.style.setProperty('font-size', '0.8rem');
+		pointerEl.style.setProperty('color', 'rgb(255 20 147)');
+		pointerEl.style.setProperty('mix-blend-mode', 'multiply');
+		pointerEl.style.setProperty('text-indent', '10px');
 		pointerEl.style.setProperty('position', 'fixed');
 		pointerEl.style.setProperty('z-index', '99999');
 		pointerEl.style.setProperty(
 			'background-color',
-			'var(--color-pointer, rgba(255 20 147 / 0.4 ))'
+			'var(--io-pointer-color, rgba(255 20 147 / 0.3 ))'
 		);
+		pointerEl.style.setProperty('opacity', 'var(--io-pointer-opacity, 1)');
 
 		document.body.appendChild(pointerEl);
 	}

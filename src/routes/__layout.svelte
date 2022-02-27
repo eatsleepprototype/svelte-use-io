@@ -5,12 +5,7 @@
 <slot />
 
 <style>
-	:global(body) {
+	:global(body), :global(code) {
 		font-family: "Space Mono", monospace;
 	}
-
-    :global(pre) {
-        overflow-x: scroll;
-        border-radius: 12px;
-    }
 </style>

@@ -1,7 +1,7 @@
 import type { Options, ActionOptions } from './types';
 import { create_pointer } from '~/lib/create_pointer';
 
-const default_callback: Options['callback'] = ({ entry, observer }) => {
+export const default_callback: Options['callback'] = ({ entry, observer }) => {
 	const el = entry.target as HTMLElement;
 
 	if (entry.isIntersecting) {
