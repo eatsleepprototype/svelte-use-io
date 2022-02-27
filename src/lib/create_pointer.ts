@@ -10,8 +10,10 @@ export const create_pointer = (entry: IntersectionObserverEntry) => {
 		pointerEl.dataset.useIoDev = 'true';
 		pointerEl.style.setProperty('position', 'fixed');
 		pointerEl.style.setProperty('z-index', '99999');
-		pointerEl.style.setProperty('background-color', 'red');
-		pointerEl.style.setProperty('opacity', '0.4');
+		pointerEl.style.setProperty(
+			'background-color',
+			'var(--color-pointer, rgba(255 20 147 / 0.4 ))'
+		);
 
 		document.body.appendChild(pointerEl);
 	}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { create_observer } from '~/lib/observer';
+	import content from '~/content/homepage.json';
 
 	const { observer, io } = create_observer({
 		showRootBound: true,
@@ -9,11 +10,10 @@
 
 	const colors = ['lightsalmon', 'lightgreen', 'lightpink', 'tomato', 'lightblue'];
 
-	let count = 6;
 	let colorId = 0;
 	let currentId = 0;
 
-	const handleIntersection = (id) => () => {
+	const handleIntersection = (id: number) => () => {
 		colorId = (colorId + 1) % colors.length;
 		currentId = id;
 	};
@@ -26,7 +26,7 @@
 <div class="root" style:--color-highlight={colors[colorId]}>
 	<nav class="nav">
 		<div class="content">
-			<h1>svelte-use-observer</h1>
+			<h1>svelte-use-io</h1>
 			<div>
 				<a href="https://github.com/d4rekanguok/svelte-use-io">Github↗</a>
 			</div>
@@ -36,11 +36,10 @@
 	<main class="main-grid">
 		<div data-grid-name="a" class="page-content">
 			<h2>A Svelte action for intersection observer</h2>
-			
 		</div>
 		<nav class="main-nav" data-grid-name="b">
 			<ul class="main-nav-list">
-				{#each Array.from({ length: count }) as _, i (i)}
+				{#each content as _, i (i)}
 					<li class:active={currentId === i}>
 						A0{i + 1}
 					</li>
@@ -48,10 +47,12 @@
 			</ul>
 		</nav>
 		<div data-grid-name="c" class="container">
-			{#each Array.from({ length: count }) as _, i (i)}
+			{#each content as { title, html }, i (i)}
 				<section use:observer class="block" on:intersecting={handleIntersection(i)}>
 					<div class="block-num">
-						A0{i + 1}
+						<div class="label">A0{i + 1}</div>
+						<h3>{title}</h3>
+						<div>{@html html}</div>
 					</div>
 				</section>
 			{/each}
@@ -83,7 +84,7 @@
 
 	.main-grid {
 		display: grid;
-		grid-template-columns: 3rem 1fr;
+		grid-template-columns: 4rem 1fr;
 		grid-template-areas:
 			'a a'
 			'b c';
@@ -102,7 +103,7 @@
 	.main-nav {
 		align-self: start;
 		position: sticky;
-		top: 4rem;
+		top: 5rem;
 	}
 
 	.main-nav-list {
@@ -110,10 +111,13 @@
 		writing-mode: vertical-lr;
 		text-orientation: sideways-right;
 		display: flex;
-		align-items: center;
 		gap: 1rem;
 		padding: 0;
 		list-style-type: none;
+	}
+
+	.main-nav-list li {
+		padding: 0.5rem 0.25rem;
 	}
 
 	.main-nav-list li.active {
@@ -138,32 +142,37 @@
 	}
 
 	.page-content {
-		padding: 1rem;
+		padding: 0 1rem;
 		background-color: white;
 		color: #222;
+		margin-bottom: 8rem;
 	}
-	
+
 	.page-content h2 {
-		font-size: 3rem;
+		font-size: 2.5rem;
+		max-width: 640px;
 	}
 
 	.block {
-		height: 20vh;
-		margin: 4rem 0;
+		min-height: 20vh;
+		border-bottom: var(--border-w) solid black;
 	}
 
 	.block-num {
 		--color-opacity: 1;
 		color: rgba(var(--color-black) / var(--color-opacity));
-
 		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		border-bottom: var(--border-w) solid black;
+	}
 
-		font-size: 4rem;
-		font-weight: bold;
+	.block-num .label {
+		font-size: 1.5rem;
+		font-weight: 800;
+	}
+
+	.block-num h3 {
+		font-size: 3rem;
+		margin: 0;
+		font-weight: 600;
 		opacity: 1;
 	}
 </style>

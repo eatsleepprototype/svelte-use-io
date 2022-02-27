@@ -1,5 +1,5 @@
 {
-  "name": "svelte-use-observer",
+  "name": "svelte-use-io",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev --port 1234",
@@ -24,11 +24,20 @@
     "modern-normalize": "^1.1.0",
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.5.0",
+    "rehype-highlight": "^5.0.2",
+    "rehype-stringify": "^9.0.3",
+    "remark-extract-frontmatter": "^3.2.0",
+    "remark-frontmatter": "^4.0.1",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.10.1",
+    "svelte2tsx": "^0.5.5",
     "tslib": "^2.3.1",
-    "typescript": "~4.5.4"
+    "typescript": "~4.5.4",
+    "unified": "^10.1.1",
+    "yaml": "^1.10.2"
   },
   "type": "module",
   "volta": {
