@@ -1,5 +1,5 @@
 import type { Options, ActionOptions } from './types';
-import { create_pointer } from '~/lib/create_pointer';
+import { create_pointer } from './create_pointer';
 
 export const default_callback: Options['callback'] = ({ entry, observer }) => {
 	const el = entry.target as HTMLElement;
