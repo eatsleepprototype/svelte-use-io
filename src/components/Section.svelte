@@ -1,5 +1,8 @@
 <script>
+	import { fade } from 'svelte/transition'
 	export let observer;
+	export let displayMessage = false;
+
 	let intersecting;
 	let ratio;
 </script>
@@ -10,6 +13,7 @@
 	</div>
 	<div
 		class="hey"
+		aria-live="polite"
 		use:observer
 		on:intersecting={({ detail }) => {
 			intersecting = true;
@@ -17,20 +21,24 @@
 		}}
 		on:unintersecting={() => (intersecting = false)}
 	>
-		I'm {intersecting ? '' : 'not'} intersecting
-		{intersecting ? `at ${ratio}%` : ''}
+		{#if displayMessage}
+			<span transition:fade>
+				I'm {intersecting ? '' : 'not'} intersecting
+				{intersecting ? `at ${ratio}%` : ''}
+			</span>
+		{/if}
 	</div>
 </section>
 
 <style>
-    .content {
-        text-align: center;
-        margin-bottom: 1rem;
-    }
+	.content {
+		text-align: center;
+		margin-bottom: 1rem;
+	}
 
 	.hey {
 		position: relative;
-        padding: 1rem;
+		padding: 1rem;
 		min-height: 10vh;
 		width: 100%;
 		background-color: lightpink;
@@ -39,6 +47,6 @@
 		justify-content: center;
 		font-size: 2rem;
 		margin-bottom: 60vh;
-        border-radius: 4px;
+		border-radius: 4px;
 	}
 </style>

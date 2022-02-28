@@ -26,6 +26,10 @@
 		currentId = id;
 	};
 
+	const handleUnintersection = () => {
+		currentId = null
+	}
+
 	onDestroy(() => {
 		io.disconnect();
 	});
@@ -70,6 +74,7 @@
 					class:showRootBound
 					class="block"
 					on:intersecting={handleIntersection(i)}
+					on:unintersecting={handleUnintersection}
 				>
 					<div class="block-num">
 						<div class="label" class:active={currentId === i}>A0{i + 1}</div>
@@ -78,7 +83,7 @@
 					</div>
 				</section>
 			{/each}
-			<Section {observer} />
+			<Section {observer} displayMessage={showRootBound} />
 		</div>
 	</main>
 	<footer>
@@ -92,6 +97,7 @@
 		--color-black: 2 2 2;
 		--color-fg: rgba(var(--color-black) / 1);
 		--color-bg: white;
+		--color-bg-100: #f3f4f6;
 		--border-w: 3px;
 
 		color: var(--color-fg);
