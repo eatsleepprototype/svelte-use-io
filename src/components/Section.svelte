@@ -41,7 +41,7 @@
 		padding: 1rem;
 		min-height: 10vh;
 		width: 100%;
-		background-color: lightpink;
+		background-color: var(--color-highlight);
 		display: flex;
 		align-items: center;
 		justify-content: center;
