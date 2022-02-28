@@ -97,11 +97,11 @@
 		--color-black: 2 2 2;
 		--color-fg: rgba(var(--color-black) / 1);
 		--color-bg: white;
-		--color-bg-100: #f3f4f6;
+		--color-bg-code: #f9fafb;
+		--color-bg-code-hover: #f3f4f6;
 		--border-w: 3px;
 
 		color: var(--color-fg);
-		transition: background-color 0.3s ease;
 	}
 
 	.nav {

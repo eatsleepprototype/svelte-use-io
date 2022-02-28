@@ -12,8 +12,13 @@
 		overflow: hidden;
 		line-height: 1.5;
 		font-size: 1.1rem;
-		background-color: var(--color-bg-100);
+		background-color: var(--color-bg-code);
+        transition: background-color 0.3s ease;
 	}
+
+    .block-html :global(pre):hover {
+        background-color: var(--color-bg-code-hover);
+    }
 
 	.block-html :global(pre .hljs) {
 		background-color: transparent;
