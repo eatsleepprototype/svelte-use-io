@@ -43,6 +43,8 @@
 	<meta property="og:image" content="https://svelte-use-io.byderek.com/preview-image.png" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta name="twitter:creator" content="@dereknguyen10" />
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <div class="root" style:--color-highlight={colors[colorId]}>
