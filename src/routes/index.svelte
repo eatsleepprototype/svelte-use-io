@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { browser } from '$app/env';
-	import { create_observer } from '~/lib';
+	import { createObserver } from '~/lib';
 	import content from '~/content/homepage.json';
 	import RenderHtml from '~/components/RenderHTML.svelte';
 	import Section from '~/components/Section.svelte';
 
-	const { observer, io } = create_observer({
+	const { observer, io } = createObserver({
 		showRootBound: true,
 		threshold: Array.from({ length: 11 }, (_, i) => i / 10),
 		rootMargin: `-49% 0px`
 	});
 
-	const colors = ['lightsalmon', 'lightgreen', 'lightpink', 'tomato', 'lightblue'];
+	const colors = ['lightsalmon', 'lightgreen', 'lightpink', 'MistyRose'];
 
 	let colorId = 0;
 	let currentId = 0;
@@ -27,18 +27,25 @@
 	};
 
 	const handleUnintersection = () => {
-		currentId = null
-	}
+		currentId = null;
+	};
 
 	onDestroy(() => {
 		io.disconnect();
 	});
 </script>
 
+<svelte:head>
+	<title>svelte-use-io | Svelte action for Intersection Observer</title>
+</svelte:head>
+
 <div class="root" style:--color-highlight={colors[colorId]}>
 	<nav class="nav">
 		<div class="content">
-			<h1>svelte-use-io</h1>
+			<h1>
+				<img class="logo" src="/favicon.svg" alt="svelte-use-io logo" />
+				<span>svelte-use-io</span>
+			</h1>
 			<label class="fancy-switch">
 				<input bind:checked={showRootBound} type="checkbox" />
 				<span>Show <code>rootBound</code></span>
@@ -60,59 +67,66 @@
 		</div>
 		<nav class="main-nav" data-grid-name="b">
 			<ul class="main-nav-list">
-				{#each content as _, i (i)}
+				{#each content as { title }, i (i)}
 					<li class:active={currentId === i}>
-						A0{i + 1}
+						<a href="#{title}">
+							<span class="nav-item-number">{i + 1}</span>
+							{title}
+						</a>
 					</li>
 				{/each}
 			</ul>
 		</nav>
-		<div data-grid-name="c" class="container">
+		<ul data-grid-name="c" class="container">
 			{#each content as { title, html }, i (i)}
-				<section
-					use:observer
-					class:showRootBound
-					class="block"
-					on:intersecting={handleIntersection(i)}
-					on:unintersecting={handleUnintersection}
-				>
-					<div class="block-num">
-						<div class="label" class:active={currentId === i}>A0{i + 1}</div>
-						<h3>{title}</h3>
-						<RenderHtml {html} />
-					</div>
-				</section>
+				<li id={title}>
+					<section
+						use:observer
+						class:showRootBound
+						class="block"
+						on:intersecting={handleIntersection(i)}
+						on:unintersecting={handleUnintersection}
+					>
+						<div class="block-num">
+							<div class="block-content">
+								<div class="label" class:active={currentId === i}>A0{i + 1}</div>
+								<h3>{title}</h3>
+							</div>
+
+							<RenderHtml {html} />
+						</div>
+					</section>
+				</li>
 			{/each}
-			<Section {observer} displayMessage={showRootBound} />
-		</div>
+			<li>
+				<Section {observer} displayMessage={showRootBound} />
+			</li>
+		</ul>
 	</main>
 	<footer>
-		<div>If you like this, checkout my storybook rip-off called `talenote`.</div>
+		<div>
+			Checkout my storybook-like project for Svelte Kit called <a
+				href="https://github.com/d4rekanguok/talenote">`talenote`</a
+			>.
+		</div>
 		<div>👋 Bye!</div>
 	</footer>
 </div>
 
 <style>
 	.root {
-		--color-black: 2 2 2;
-		--color-fg: rgba(var(--color-black) / 1);
-		--color-bg: white;
-		--color-bg-code: #f9fafb;
-		--color-bg-code-hover: #f3f4f6;
-		--border-w: 3px;
-
 		color: var(--color-fg);
+		background-color: var(--color-bg);
+		max-width: 2000px;
 	}
 
 	.nav {
-		color: rgba(var(--color-black) / 1);
 		background-color: var(--color-bg);
 		border-bottom: var(--border-w) solid var(--color-fg);
-
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		padding: 1rem;
+		padding: 1rem var(--margin-x, 1rem);
 	}
 
 	.main-grid {
@@ -121,6 +135,7 @@
 		grid-template-areas:
 			'a a'
 			'b c';
+		padding: var(--margin-x);
 	}
 
 	@media (min-width: 600px) {
@@ -145,6 +160,12 @@
 		top: 5rem;
 	}
 
+	@media (min-width: 1440px) {
+		.main-nav {
+			font-size: 1.2rem;
+		}
+	}
+
 	.main-nav-list {
 		font-weight: 800;
 		writing-mode: vertical-lr;
@@ -152,19 +173,70 @@
 		display: flex;
 		gap: 1rem;
 		padding: 0;
+		margin: 0;
 		list-style-type: none;
 	}
 
 	.main-nav-list li {
-		padding: 0.5rem 0.25rem;
+		position: relative;
+		padding: 0.5rem;
+		transform: translateX(0);
+		transition: transform 0.3s ease;
 	}
 
-	.main-nav-list li.active {
+	.main-nav-list li:not(.active)::before {
+		content: '';
+		position: absolute;
+		top: 1rem;
+		left: -0.1rem;
+		height: calc(100% - 1.5rem);
+		width: 2px;
+		transform: scaleY(0) rotate(2deg);
+		transform-origin: top left;
+		opacity: 0;
+		transition: transform 0.3s ease, opacity 0.3s ease;
 		background-color: var(--color-highlight);
 	}
 
+	.main-nav-list li:not(.active):hover {
+		transform: translateX(5px);
+	}
+
+	.main-nav-list li:not(.active):hover::before {
+		opacity: 1;
+		transform: scaleY(1) rotate(0);
+	}
+
+	.main-nav-list li a {
+		color: currentColor;
+		text-decoration: none;
+	}
+
+	.nav-item-number {
+		text-orientation: upright;
+		opacity: 0.4;
+	}
+
+	@media (prefers-color-scheme: light) {
+		.main-nav-list li.active {
+			background-color: var(--color-highlight);
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.main-nav-list li.active {
+			color: var(--color-highlight);
+		}
+	}
+
 	.container {
-		padding: 0 2rem;
+		margin: 0;
+		margin-top: -5rem;
+		list-style-type: none;
+	}
+
+	.container li {
+		padding: 5rem 0;
 	}
 
 	.content {
@@ -178,13 +250,20 @@
 	.content h1 {
 		margin: 0;
 		font-size: 1rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.content h1 .logo {
+		width: 2rem;
+		height: 2rem;
 	}
 
 	.page-content {
-		padding: 0 1rem;
-		background-color: white;
-		color: #222;
-		margin-bottom: 8rem;
+		background-color: var(--color-bg);
+		color: var(--color-fg);
+		margin-bottom: 10rem;
 	}
 
 	.page-content h2 {
@@ -193,11 +272,17 @@
 		max-width: 640px;
 	}
 
+	@media (min-width: 800px) {
+		.page-content h2 {
+			font-size: 3.5rem;
+			max-width: 800px;
+		}
+	}
+
 	.block {
 		min-height: 20vh;
-		padding-bottom: 4rem;
-		margin-bottom: 4rem;
-		border-bottom: var(--border-w) solid black;
+		padding-bottom: 5rem;
+		border-bottom: var(--border-w) solid var(--color-fg);
 		border-radius: 0px;
 		transition: opacity 0.3s ease;
 	}
@@ -209,8 +294,15 @@
 	}
 
 	.block-num {
-		--color-opacity: 1;
-		color: rgba(var(--color-black) / var(--color-opacity));
+		background-color: var(--color-bg);
+		color: var(--color-fg);
+	}
+
+	@media (min-width: 1440px) {
+		.block-num {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+		}
 	}
 
 	.block-num .label {

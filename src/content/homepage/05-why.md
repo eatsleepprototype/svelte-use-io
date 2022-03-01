@@ -8,8 +8,8 @@ I think the <abbr title="Intersection Observer API">IO API</abbr> is a lot easie
 
 ```html
 <script>
-    import { create_observer } from 'svelte-use-io'
-    const { observer } = create_observer()
+    import { createObserver } from 'svelte-use-io'
+    const { observer } = createObserver()
     let intersecting = false
 </script>
 

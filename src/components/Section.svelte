@@ -1,5 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition'
+	import { createEventDispatcher } from 'svelte'
+
 	export let observer;
 	export let displayMessage = false;
 
@@ -28,6 +30,9 @@
 			</span>
 		{/if}
 	</div>
+	<div class="padder">
+		{`<!-- Just empty space to pad the box up -->`}
+	</div>
 </section>
 
 <style>
@@ -41,12 +46,21 @@
 		padding: 1rem;
 		min-height: 10vh;
 		width: 100%;
-		background-color: var(--color-highlight);
+		color: #9d174d;
+		background-color: lightpink;
 		display: flex;
+		text-align: center;
 		align-items: center;
 		justify-content: center;
 		font-size: 2rem;
-		margin-bottom: 60vh;
 		border-radius: 4px;
+	}
+
+	.padder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 60vh;
+		opacity: 0.6;
 	}
 </style>

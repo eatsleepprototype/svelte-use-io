@@ -1,0 +1,25 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<style>
+		#bg {
+			fill: black;
+		}
+		.line {
+			stroke: #ff69b4;
+		}
+		@media (prefers-color-scheme: dark) {
+			#bg {
+				fill: #ff69b4;
+			}
+			.line {
+				stroke: white;
+			}
+		}
+	</style>
+	<path
+		id="bg"
+		d="M60 2.3094C62.4752 0.880338 65.5248 0.880339 68 2.3094L115.426 29.6906C117.901 31.1197 119.426 33.7607 119.426 36.6188V91.3812C119.426 94.2393 117.901 96.8803 115.426 98.3094L68 125.691C65.5248 127.12 62.4752 127.12 60 125.691L12.5744 98.3094C10.0992 96.8803 8.57438 94.2393 8.57438 91.3812V36.6188C8.57438 33.7607 10.0992 31.1197 12.5744 29.6906L60 2.3094Z"
+		fill="black"
+	/>
+	<circle class="line" cx="64" cy="64" r="41" stroke="#FF69B4" stroke-width="6" />
+	<circle class="line" cx="52" cy="74" r="25" stroke="#FF69B4" stroke-width="6" />
+</svg>

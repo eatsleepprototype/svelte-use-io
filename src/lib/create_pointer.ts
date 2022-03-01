@@ -11,7 +11,7 @@ export const create_pointer = (entry: IntersectionObserverEntry) => {
 		pointerEl.textContent = 'rootBound';
 		pointerEl.style.setProperty('font-size', '0.8rem');
 		pointerEl.style.setProperty('color', 'rgb(255 20 147)');
-		pointerEl.style.setProperty('mix-blend-mode', 'multiply');
+		pointerEl.style.setProperty('mix-blend-mode', 'var(--io-pointer-blend-mode, multiply)');
 		pointerEl.style.setProperty('text-indent', '10px');
 		pointerEl.style.setProperty('position', 'fixed');
 		pointerEl.style.setProperty('z-index', '99999');

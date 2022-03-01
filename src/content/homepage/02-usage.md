@@ -7,14 +7,10 @@ Passing directly to html elements:
 ```html
 <script>
 	import { onDestroy } from 'svelte';
-	import { create_observer } from 'svelte-use-io';
-	const { observer, io } = create_observer();
+	import { createObserver } from 'svelte-use-io';
+	const { observer } = createObserver();
 	const doStuff = ({ detail }) => console.log({ detail });
 	// { detail: IntersectionObserverEntry }
-
-	onDestroy(() => {
-		io.disconnect();
-	})
 </script>
 
 <ul>
