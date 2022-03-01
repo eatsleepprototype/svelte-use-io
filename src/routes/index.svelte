@@ -198,13 +198,14 @@
 		padding-bottom: 4rem;
 		margin-bottom: 4rem;
 		border-bottom: var(--border-w) solid black;
-		border-radius: 4px;
+		border-radius: 0px;
 		transition: opacity 0.3s ease;
 	}
 
 	.block.showRootBound {
 		box-shadow: 0 0 0 2px hotpink;
 		opacity: 0.6;
+		border-radius: 4px;
 	}
 
 	.block-num {
@@ -265,7 +266,7 @@
 		height: 1.5rem;
 		border-radius: 999px;
 		background-color: var(--color-fg);
-		transition: background-color 0.3s ease;
+		transition: background-color 0.3s;
 	}
 
 	.fancy-switch input::before {
@@ -278,7 +279,7 @@
 		height: 1rem;
 		border-radius: 999px;
 		background-color: var(--color-bg);
-		transition: transform 0.3s ease;
+		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
 	.fancy-switch input:checked {
