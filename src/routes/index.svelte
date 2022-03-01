@@ -36,7 +36,13 @@
 </script>
 
 <svelte:head>
-	<title>svelte-use-io | Svelte action for Intersection Observer</title>
+	<title>svelte-use-io</title>
+	<meta name="description" content="A Svelte action for Intersection Observer" />
+	<meta property="og:title" content="svelte-use-io" />
+	<meta property="og:description" content="A Svelte action for Intersection Observer" />
+	<meta property="og:image" content="https://svelte-use-io.byderek.com/preview-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 </svelte:head>
 
 <div class="root" style:--color-highlight={colors[colorId]}>

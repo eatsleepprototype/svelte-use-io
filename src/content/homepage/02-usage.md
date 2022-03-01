@@ -43,3 +43,7 @@ Listening only once:
 	<!-- or -->
 	<div use:observer data-io-once="true"></div>
 ```
+
+Other demos:
+
+- [[Svelte REPL] Observe a single / multiple targets at once](https://svelte.dev/repl/ea03c5b6a4f9483fa90df6e3c0587f56?version=3.46.4)
