@@ -60,5 +60,3 @@ onDestroy(() => {
 	io.disconnect();
 });
 ```
-
-But note that if there's a

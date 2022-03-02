@@ -40,10 +40,10 @@ export function create_observer(options: Options = {}) {
 	};
 
 	const cb: IntersectionObserverCallback = (entries, observer) => {
+		if (showRootBound) {
+			create_pointer(entries);
+		}
 		entries.forEach((entry) => {
-			if (showRootBound) {
-				create_pointer(entry);
-			}
 			callback({ entry, observer });
 		});
 	};

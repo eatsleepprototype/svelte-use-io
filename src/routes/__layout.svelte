@@ -38,6 +38,7 @@
 			--color-bg-code: #222;
 			--color-code-inline: #d8b4fe;
 			--color-bg-code-hover: #2d2d2d;
+			--io-pointer-color-text-intersecting: #a7f3d0;
 		}
 	}
 
