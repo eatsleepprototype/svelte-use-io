@@ -87,17 +87,19 @@
 		</nav>
 		<ul data-grid-name="c" class="container">
 			{#each content as { title, html }, i (i)}
+				{@const active = currentId === i}
 				<li id={title}>
 					<section
 						use:observer
 						class:showRootBound
 						class="block"
+						class:active
 						on:intersecting={handleIntersection(i)}
 						on:unintersecting={handleUnintersection}
 					>
 						<div class="block-num">
 							<div class="block-content">
-								<div class="label" class:active={currentId === i}>A0{i + 1}</div>
+								<div class="label" class:active>A0{i + 1}</div>
 								<h3>{title}</h3>
 							</div>
 
@@ -293,12 +295,17 @@
 		border-bottom: var(--border-w) solid var(--color-fg);
 		border-radius: 0px;
 		transition: opacity 0.3s ease;
+		overflow: hidden;
 	}
 
 	.block.showRootBound {
 		box-shadow: 0 0 0 2px hotpink;
 		opacity: 0.6;
 		border-radius: 4px;
+	}
+
+	.block.showRootBound.active {
+		box-shadow: 0 0 0 2px rgba(0 250 154);
 	}
 
 	.block-num {

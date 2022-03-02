@@ -1,6 +1,5 @@
 <script>
-	import { fade } from 'svelte/transition'
-	import { createEventDispatcher } from 'svelte'
+	import { fade } from 'svelte/transition';
 
 	export let observer;
 	export let displayMessage = false;
@@ -28,6 +27,11 @@
 				I'm {intersecting ? '' : 'not'} intersecting
 				{intersecting ? `at ${ratio}%` : ''}
 			</span>
+			<a
+				transition:fade={{ delay: 100 }}
+				href="https://github.com/eatsleepprototype/svelte-use-io/blob/main/src/components/Section.svelte"
+				>Source (github)</a
+			>
 		{/if}
 	</div>
 	<div class="padder">
@@ -49,11 +53,18 @@
 		color: #9d174d;
 		background-color: lightpink;
 		display: flex;
+		flex-direction: column;
 		text-align: center;
+		gap: 0.5rem;
 		align-items: center;
 		justify-content: center;
 		font-size: 2rem;
 		border-radius: 4px;
+	}
+
+	.hey a {
+		color: currentColor;
+		font-size: 1rem;
 	}
 
 	.padder {
