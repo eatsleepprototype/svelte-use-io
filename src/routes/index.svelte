@@ -360,6 +360,7 @@
 	}
 
 	.fancy-switch input {
+		-webkit-appearance: none;
 		appearance: none;
 		position: relative;
 		width: 2.25rem;
