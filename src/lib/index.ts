@@ -1,4 +1,4 @@
-import { create_observer, default_callback } from './observer';
+import { create_observer, default_callback } from './observer.js';
 
 export {
 	create_observer,
